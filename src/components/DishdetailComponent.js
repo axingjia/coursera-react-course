@@ -39,20 +39,28 @@ class Dishdetail extends Component {
 
   render(){
       var dish=this.props.dish;
-      return (
-        <div className="row">
-            <Card className="col-12 col-md-5 m-1">
-              <CardImg top src={dish.image} alt={dish.name} />
-              <CardBody>
-                <CardTitle>{dish.name}</CardTitle>
-                <CardText>{dish.description}</CardText>
-              </CardBody>
-          </Card>
-          <div className="col-12 col-md-5 m-1">
-            {this.renderComments(dish.comments)}
-          </div>
-        </div>
-    );
+      if ((this.props.dish === null) || (this.props.dish === undefined)){
+          return (<div></div>);
+        
+      }else{
+          return (
+            <div className="container">
+            <div className="row">
+                <Card className="col-12 col-md-5 m-1">
+                  <CardImg top src={dish.image} alt={dish.name} />
+                  <CardBody>
+                    <CardTitle>{dish.name}</CardTitle>
+                    <CardText>{dish.description}</CardText>
+                  </CardBody>
+              </Card>
+              <div className="col-12 col-md-5 m-1">
+                {this.renderComments(dish.comments)}
+              </div>
+            </div>
+            </div>
+            
+        );
+    }
 
   }
 
