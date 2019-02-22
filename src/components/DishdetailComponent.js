@@ -24,8 +24,9 @@ class CommentForm extends Component{
     }
     
     handleSubmit(values) {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        // console.log('Current State is: ' + JSON.stringify(values));
+        // alert('Current State is: ' + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment);
         // event.preventDefault();
     }
     render(){
@@ -47,11 +48,11 @@ class CommentForm extends Component{
                                <Label htmlFor="rating" md={12}>Rating</Label>
                                 <Control.select model=".rating" name="rating"
                                     className="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
                                 </Control.select>
                             </Col>
                         </Row>
@@ -115,11 +116,11 @@ class Dishdetail extends Component {
   
   
 
-  renderComments(comments){
+  renderComments(comments,addComment, dishId){
     if (comments != null){
         const commentDOM=comments.map((comment)=>{
             return (
-            <div>
+            <div key={comment.id}>
               <ul key={comment.id} className="list-unstyled">
               <li> -- {comment.author},{comment.date}}</li>
               <li> -- {comment.comment}</li>
@@ -133,7 +134,7 @@ class Dishdetail extends Component {
             <div>
             <h4>Comments</h4>
             {commentDOM}
-            <CommentForm></CommentForm>
+            <CommentForm addComment={addComment} dishId={dishId}></CommentForm>
             </div>
         );
     }else
@@ -175,7 +176,7 @@ class Dishdetail extends Component {
                       </Card>
                      </div>
                      <div className="col-12 col-md-5 m-1">
-                         {this.renderComments(this.props.comments)}
+                         {this.renderComments(this.props.comments,this.props.addComment,this.props.dish.id)}
                          
                      </div>
                  </div>
