@@ -28,10 +28,10 @@ class CommentForm extends Component{
     handleSubmit(values) {
         // console.log('Current State is: ' + JSON.stringify(values));
         // alert('Current State is: ' + JSON.stringify(values));
-        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.name, values.comment);
         console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
-        this.props.resetFeedbackForm();
+        // this.props.resetFeedbackForm();
         // event.preventDefault();
     }
     render(){
@@ -121,7 +121,7 @@ class Dishdetail extends Component {
   
   
 
-  renderComments(comments,addComment, dishId){
+  renderComments(comments,postComment, dishId){
     if (comments != null){
         const commentDOM=comments.map((comment)=>{
             return (
@@ -139,7 +139,7 @@ class Dishdetail extends Component {
             <div>
             <h4>Comments</h4>
             {commentDOM}
-            <CommentForm addComment={addComment} dishId={dishId}></CommentForm>
+            <CommentForm postComment={postComment} dishId={dishId}></CommentForm>
             </div>
         );
     }else
@@ -200,7 +200,7 @@ class Dishdetail extends Component {
                       </Card>
                      </div>
                      <div className="col-12 col-md-5 m-1">
-                         {this.renderComments(this.props.comments,this.props.addComment,this.props.dish.id)}
+                         {this.renderComments(this.props.comments,this.props.postComment,this.props.dish.id)}
                          
                      </div>
                  </div>

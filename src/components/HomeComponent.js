@@ -31,6 +31,7 @@ function RenderCard({item, isLoading, errMess}) {
 }
 
 function Home(props) {
+    console.log('props.dish ',props.dish);
     
     return(
         <div className="container">
