@@ -8,6 +8,7 @@ import { Control, Form, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 class CommentForm extends Component{
     constructor(props){
@@ -125,6 +126,8 @@ class Dishdetail extends Component {
     if (comments != null){
         const commentDOM=comments.map((comment)=>{
             return (
+                
+                <Fade in>
             <div key={comment.id}>
               <ul key={comment.id} className="list-unstyled">
               <li> -- {comment.author},{comment.date}}</li>
@@ -132,6 +135,7 @@ class Dishdetail extends Component {
               </ul>
               
             </div>
+            </Fade>
 
             );
         });
@@ -191,6 +195,11 @@ class Dishdetail extends Component {
                  </div>
                  <div className="row">
                      <div className="col-12 col-md-5 m-1">
+                     <FadeTransform
+                        in
+                        transformProps={{
+                            exitTransform: 'scale(0.5) translateY(-50%)'
+                        }}>
                      <Card>
                           <CardImg top src={baseUrl + dish.image} alt={dish.name} />
                           <CardBody>
@@ -198,9 +207,12 @@ class Dishdetail extends Component {
                             <CardText>{dish.description}</CardText>
                           </CardBody>
                       </Card>
+                      </FadeTransform>
                      </div>
                      <div className="col-12 col-md-5 m-1">
+                      
                          {this.renderComments(this.props.comments,this.props.postComment,this.props.dish.id)}
+                        
                          
                      </div>
                  </div>
