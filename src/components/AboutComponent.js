@@ -86,13 +86,19 @@ function About(props) {
                 <div className="col-12">
                     <h2>Corporate Leadership</h2>
                 </div>
+				<FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
                 <div className="col-12">
-				<Fade in>
+				<Stagger in>
                     <Media list>
                         {leaders}
                     </Media>
-				</Fade>
+				</Stagger>
                 </div>
+				</FadeTransform>
             </div>
         </div>
     );
